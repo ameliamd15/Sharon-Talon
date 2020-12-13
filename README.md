@@ -8,5 +8,5 @@ While the rss feed is a nice way to fetch article names, their authors, thumbnai
 
 For parsing the xml rss feeds, I use the AlamofireRSSParser library (https://github.com/AdeptusAstartes/AlamofireRSSParser)
 
-All library dependencies are maintained using cocoapods (https://cocoapods.org/) so that future updates to the app (for example, when we have a new ios version next year) are easy to do.
+All library dependencies are maintained using cocoapods (https://cocoapods.org/) so that future updates to the app (for example, when we have a new ios version next year) are easy to do. Checkout the Podfile in the project for the version numbers.
 
