@@ -25,7 +25,7 @@ class MenuManager: NSObject, UITableViewDelegate, UITableViewDataSource {
             
             blackView.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(self.dismissMenu)))
             
-            let height: CGFloat = 400
+            let height: CGFloat = 500
             let y = window.frame.height - height
             menuTableView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height)
             window.addSubview(blackView)

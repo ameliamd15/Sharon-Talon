@@ -16,8 +16,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     
     var sourceIndex = 0;
-    var menus = ["Featured", "School News", "News", "Sports", "A & E", "Editorial", "Class of 2020", "Coronavirus"]
-    var urls = ["https://shstalon.com/category/feature/feed/", "https://shstalon.com/category/school-news/feed/", "https://shstalon.com/category/news/feed/", "https://shstalon.com/category/sports/feed/", "https://shstalon.com/category/ae/feed/", "https://shstalon.com/category/editorial/feed/", "https://shstalon.com/category/class-of-2020/feed/", "https://shstalon.com/category/coronavirus/feed/"];
+    var menus = ["Home", "Featured", "School News", "News", "Sports", "A & E", "Editorial", "Class of 2020", "Coronavirus"]
+    var urls = ["https://shstalon.com/feed/", "https://shstalon.com/category/feature/feed/", "https://shstalon.com/category/school-news/feed/", "https://shstalon.com/category/news/feed/", "https://shstalon.com/category/sports/feed/", "https://shstalon.com/category/ae/feed/", "https://shstalon.com/category/editorial/feed/", "https://shstalon.com/category/class-of-2020/feed/", "https://shstalon.com/category/coronavirus/feed/"];
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +59,7 @@ class MainViewController: UIViewController {
         self.childViewController!.rssUrl = urls[sourceIndex];
         if (!initial) {
             self.childViewController!.loadArticles()
-            self.subHeading.text = menus[sourceIndex]
         }
+        self.subHeading.text = menus[sourceIndex]
     }
 }
