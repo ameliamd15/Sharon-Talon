@@ -33,7 +33,7 @@ class ArticlesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if (articles == nil) {
-            self.loadArticles()
+            self.startLoadArticles()
         }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -41,34 +41,53 @@ class ArticlesTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
-    public func loadArticles() {
+    func scrollToTop() {
+        let topRow = IndexPath(row: 0, section: 0)
+        self.tableView.scrollToRow(at: topRow, at: .top, animated: true)
+    }
+    
+    public func startLoadArticles() {
         activityIndicatorView.startAnimating()
         tableView.separatorStyle = .none
-
+        //if (self.articles?.count ?? 0 > 0) {
+            //scrollToTop()
+        //}
         dispatchQueue.async {
-            let url = self.rssUrl;
             self.articles = [Article]();
             self.thumbnailImages = Dictionary()
-            AF.request(url).responseRSS() { (response) -> Void in
-                if let feed: RSSFeed = response.value {
-                    /// Do something with your new RSSFeed object!
-                    for item in feed.items {
-                        print(item);
-                        let article = Article();
-                        article.headline = item.title;
-                        article.desc = item.itemDescription;
-                        article.authorNDate = (item.author ?? "") + " " + self.df.string(from: item.pubDate ?? Date()) + "";
-                        article.imgUrl = item.mediaThumbnail;
-                        article.url = item.link;
+            self.loadArticles(page: 1, maxPages: 3)
+        }
+    }
+    
+    public func loadArticles(page: Int, maxPages: Int) {
+        let url = self.rssUrl + "?paged=" + String(page);
+        
+        AF.request(url).responseRSS() { (response) -> Void in
+            if let feed: RSSFeed = response.value {
+                /// Do something with your new RSSFeed object!
+                for item in feed.items {
+                    print(item);
+                    let article = Article();
+                    article.headline = item.title;
+                    article.desc = item.itemDescription;
+                    article.authorNDate = (item.author ?? "") + " " + self.df.string(from: item.pubDate ?? Date()) + "";
+                    article.imgUrl = item.mediaThumbnail;
+                    article.url = item.link;
+                    if (!article.headline!.hasPrefix("Top ")) {
                         self.articles?.append(article);
-                        
                     }
+                }
+                if (page < maxPages) {
+                    self.loadArticles(page: page + 1, maxPages: maxPages)
+                } else {
                     OperationQueue.main.addOperation() {
                         self.tableView.separatorStyle = .singleLine
                         self.tableView.reloadData()
+                        self.scrollToTop()
                     }
                 }
+            }
+            if (page == maxPages) {
                 self.activityIndicatorView.stopAnimating();
             }
         }
@@ -109,6 +128,7 @@ class ArticlesTableViewController: UITableViewController {
             }
         }
         tableView.rowHeight = 180;
+        tableView.backgroundColor = UIColor.white
         cell.setNeedsLayout();
         return cell;
     }

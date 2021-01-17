@@ -10,4 +10,5 @@ target 'Sharon Talon' do
   pod "AlamofireRSSParser"
   pod 'AlamofireImage', '~> 4.1'
   pod 'SwiftSoup'
+  pod 'Pageable'
 end

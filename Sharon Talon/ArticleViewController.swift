@@ -57,11 +57,12 @@ class ArticleViewController: UIViewController {
                 let doc: Document = try SwiftSoup.parse(myHTMLString)
                 let article: Element = try doc.select("div.entry-content").first()!
                 let articleImage: Element = try doc.select("div.featured-image-wrap").first()!
+                
                 let articleHtml: String = try article.html()
                 var articleImageHtml: String = try articleImage.html()
                 articleImageHtml = articleImageHtml.replacingOccurrences(of: "width=", with: "widthx=")
                 articleImageHtml = articleImageHtml.replacingOccurrences(of: "height=", with: "heightx=")
-                
+                print("HTML: " + articleHtml);
                 // then remove the spinner view controller
                 DispatchQueue.main.asyncAfter(deadline: .now()) {
                     self.webview.loadHTMLString("<HEAD><style type='text/css'>p{margin-bottom: 2rem;font-size: 46px;font-family:sans-serif,serif;line-height: 1.65;}div.sharedaddy, #content div.sharedaddy, #main div.sharedaddy {clear: both;display: none;}img {object-fit:contain;width: 100%;display: block;max-width: 100%;vertical-align: middle;border-style: solid;}</style></HEAD><BODY><H1 style='font-size: 66px;font-family:sans-serif,serif;font-weight:bold'>" + heading + "</H1>" + articleImageHtml + articleHtml + "</BODY>", baseURL: nil)

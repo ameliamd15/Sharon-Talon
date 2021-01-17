@@ -58,7 +58,7 @@ class MainViewController: UIViewController {
     public func loadData(initial: Bool) {
         self.childViewController!.rssUrl = urls[sourceIndex];
         if (!initial) {
-            self.childViewController!.loadArticles()
+            self.childViewController!.startLoadArticles()
         }
         self.subHeading.text = menus[sourceIndex]
     }
