@@ -2,7 +2,7 @@
 
 ##iOS App for Sharon High School Newspaper
 
-![Screenshot 1](/assets/SS1.png) 
+![Screenshot 1](/assets/Screenshots.png) 
 
 The app is built using Swift and Objective-C and basically works off of the xml rss newsfeed from the Talon website: https://shstalon.com/feed/. Using the feed, this app downloads articles at runtime so it doesn't have to be updated in future for new articles. The only time it would need an update is when the Talon website address changes. I have also included menus for the different categories found on the main page. 
 
