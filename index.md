@@ -1,4 +1,4 @@
-# Sharon-Talon
+# Sharon-Talon from Amelia's Labs
 
 ## iOS App for Sharon High School Newspaper
 
