@@ -1,6 +1,6 @@
 # Sharon-Talon
 
-##iOS App for Sharon High School Newspaper
+## iOS App for Sharon High School Newspaper
 
 ![Screenshot 1](/assets/Screenshots.png) 
 
