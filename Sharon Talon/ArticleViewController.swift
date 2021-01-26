@@ -23,7 +23,6 @@ class ArticleViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        
     }
     
     override func viewDidLoad() {
@@ -75,7 +74,5 @@ class ArticleViewController: UIViewController {
                 print("Error: \(error)")
             }
         }
-        
     }
-
 }
