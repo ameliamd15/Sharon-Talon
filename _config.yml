@@ -1,6 +1,6 @@
 theme: jekyll-theme-minimal
 title: Sharon Talon 
-logo: /TalonLogo.png
+logo: /assets/TalonLogo.png
 description: Sharon High School Newspaper iOS App
 show_downloads: true
 google_analytics:
