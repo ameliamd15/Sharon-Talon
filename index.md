@@ -1,6 +1,4 @@
-# Sharon-Talon 
-
-## iOS App for Sharon High School Newspaper
+# Sharon-Talon - iOS App for SHS Newspaper
 ### from Amelia's Labs
 ![Screenshot 1](/assets/Screenshots.png) 
 
