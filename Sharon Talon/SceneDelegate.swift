@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  Sharon Talon
 //
-//  Created by Cyril Dasari on 12/10/20.
+//  Created by Amelia Dasari on 12/10/20.
 //
 
 import UIKit

@@ -48,7 +48,7 @@ open class RSSItem: CustomStringConvertible {
     open var imagesFromDescription: [String]? = nil
     open var imagesFromContent: [String]? = nil
     open var enclosures: [[String: String]]? = nil
-    open var categories: [[String: String]]? = nil
+    open var categories: [String]? = nil
     
     open var description: String {
         return "\ttitle: \(String(describing: self.title))\n\tlink: \(String(describing: self.link))\n\titemDescription: \(String(describing: self.itemDescription))\n\tguid: \(String(describing: self.guid))\n\tauthor: \(String(describing: self.author))\n\tcomments: \(String(describing: self.comments))\n\tsource: \(String(describing: self.source))\n\tpubDate: \(String(describing: self.pubDate))\n\tmediaThumbnail: \(String(describing: self.mediaThumbnail))\n\tmediaContent: \(String(describing: self.mediaContent))\n\timagesFromDescription: \(String(describing: self.imagesFromDescription))\n\timagesFromContent: \(String(describing: self.imagesFromContent))\n\tenclosures: \(String(describing: self.enclosures))\n\tcategories: \(String(describing: self.categories))\n\n"

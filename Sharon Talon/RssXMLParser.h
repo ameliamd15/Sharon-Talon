@@ -2,7 +2,7 @@
 //  RssXMLParser.h
 //  Sharon Talon
 //
-//  Created by Cyril Dasari on 12/10/20.
+//  Created by Amelia Dasari on 12/10/20.
 //
 
 #ifndef RssXMLParser_h

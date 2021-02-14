@@ -2,7 +2,7 @@
 //  ArticlesTableViewController.swift
 //  Sharon Talon
 //
-//  Created by Cyril Dasari on 12/10/20.
+//  Created by Amelia Dasari on 12/10/20.
 //
 
 import UIKit
@@ -23,7 +23,7 @@ class ArticlesTableViewController: UITableViewController {
     override func loadView() {
         super.loadView()
         if (loader == nil) {
-            loader = self.resizeImage(image: UIImage(named: "cupertino_activity_indicator_large.gif")!, maxWidthOrHeight: 100)
+            loader = self.resizeImage(image: UIImage(named: "cupertino_activity_indicator_large.gif")!, maxWidthOrHeight: 50)
         }
         df.dateFormat = "yyyy-MM-dd";
         activityIndicatorView = UIActivityIndicatorView(style: .large)
@@ -73,6 +73,7 @@ class ArticlesTableViewController: UITableViewController {
                     article.authorNDate = (item.author ?? "") + " " + self.df.string(from: item.pubDate ?? Date()) + "";
                     article.imgUrl = item.mediaThumbnail;
                     article.url = item.link;
+                    article.categories = item.categories;
                     if (!article.headline!.hasPrefix("Top ")) {
                         self.articles?.append(article);
                     }
@@ -107,21 +108,32 @@ class ArticlesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "articleCell", for: indexPath) as! ArticleCell;
-        cell.imageView?.image = thumbnailImages[indexPath.item];
-        cell.imageView?.setNeedsDisplay();
+        cell.imgView?.image = thumbnailImages[indexPath.item];
+        cell.imgView?.setNeedsDisplay();
+        cell.imgView?.clipsToBounds = true;
         cell.title.text = self.articles?[indexPath.item].headline;
         cell.desc.text = self.articles?[indexPath.item].desc;
         cell.authorNDate.text = self.articles?[indexPath.item].authorNDate;
+        cell.categories.text = self.articles?[indexPath.item].categories?.joined(separator: " | ");
+        //self.articles?[indexPath.item].categories?.keys;
+        //cell.categoryButton.setTitle("Title", for: UIControl.State.normal);
         let imgUrl: String = self.articles?[indexPath.item].imgUrl ?? "";
-        if (cell.imageView?.image == nil) {
-            cell.imageView?.image = loader
+        if (cell.imgView?.image == nil) {
+            cell.imgView?.image = loader;
+            cell.imgView?.contentMode = .center;
+            cell.imgView?.setNeedsDisplay();
+            //cell.imgView?.clipsToBounds = true;
             AF.request(imgUrl).responseImage { response in
                 if case .success(let image) = response.result {
-                    let resizedImage: UIImage =
-                        self.resizeImage(image: image, maxWidthOrHeight: 100)
-                    self.thumbnailImages[indexPath.item] = resizedImage
+                    let resizedImage: UIImage = self.resizeImage(image: image, maxWidthOrHeight: 130);
+                    self.thumbnailImages[indexPath.item] = resizedImage;
                     if let cell = tableView.cellForRow(at: indexPath) as? ArticleCell {
-                        cell.imageView?.image = resizedImage
+                        cell.imgView?.image = resizedImage;
+                        cell.imgView?.contentMode = .scaleAspectFill;
+                        //cell.imgView?.clipsToBounds = true;
+                        //cell.imageView?.contentMode = .scaleAspectFill;
+                        //cell.imageView?.centerYAnchor.constraint(equalTo:cell.imageView?.centerYAnchor).isActive = false;
+                        //cell.imageView?.leadingAnchor.constraint(equalTo:self.contentView.leadingAnchor, constant:10).isActive = true
                     }
                     cell.setNeedsLayout();
                 }
@@ -193,7 +205,7 @@ class ArticlesTableViewController: UITableViewController {
     }
     */
     
-    func downloadImage(cell: ArticleCell, from url: String) {
+    /*func downloadImage(cell: ArticleCell, from url: String) {
         AF.request(url).responseImage { response in
             if case .success(let image) = response.result {
                 let resizedImage: UIImage =
@@ -203,7 +215,7 @@ class ArticlesTableViewController: UITableViewController {
                 //self.setNeedsLayout();
             }
         }
-    }
+    }*/
     
     private func resizeImage(image: UIImage, maxWidthOrHeight: CGFloat) -> UIImage {
         var scale = CGFloat(1)

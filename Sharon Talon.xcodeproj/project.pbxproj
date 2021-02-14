@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B21943B25CF17CB0040309D /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B21943A25CF17CB0040309D /* RoundedButton.swift */; };
 		4B2339792583BFAB00189E66 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2339782583BFAB00189E66 /* MainViewController.swift */; };
 		4B23397C2583C47700189E66 /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B23397B2583C47700189E66 /* MenuManager.swift */; };
 		4B23397F2583DA5D00189E66 /* BaseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B23397E2583DA5D00189E66 /* BaseCell.xib */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		222B3ABAAC803BD65B98501D /* Pods-Sharon Talon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sharon Talon.debug.xcconfig"; path = "Target Support Files/Pods-Sharon Talon/Pods-Sharon Talon.debug.xcconfig"; sourceTree = "<group>"; };
+		4B21943A25CF17CB0040309D /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		4B2339782583BFAB00189E66 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4B23397B2583C47700189E66 /* MenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
 		4B23397E2583DA5D00189E66 /* BaseCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaseCell.xib; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				4B23398B2583EAFC00189E66 /* images.xcassets */,
 				4B23399B2584046C00189E66 /* CircularImageView.swift */,
 				4BFEAFF82584859200D9F2B2 /* SpinnerViewController.swift */,
+				4B21943A25CF17CB0040309D /* RoundedButton.swift */,
 			);
 			path = "Sharon Talon";
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				4B4DB1B02582606300AA44B2 /* ViewController.swift in Sources */,
 				4B4DB1AC2582606300AA44B2 /* AppDelegate.swift in Sources */,
 				4B2339792583BFAB00189E66 /* MainViewController.swift in Sources */,
+				4B21943B25CF17CB0040309D /* RoundedButton.swift in Sources */,
 				4B4DB1AE2582606300AA44B2 /* SceneDelegate.swift in Sources */,
 				4B4DB1C5258268F900AA44B2 /* Article.swift in Sources */,
 			);
@@ -424,6 +428,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = us.com.adasari.TheSharonTalon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Sharon Talon/Sharon Talon-Bridging-Header.h";
@@ -447,6 +452,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = us.com.adasari.TheSharonTalon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Sharon Talon/Sharon Talon-Bridging-Header.h";

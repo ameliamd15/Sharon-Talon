@@ -2,7 +2,7 @@
 //  ArticleCell.swift
 //  Sharon Talon
 //
-//  Created by Cyril Dasari on 12/10/20.
+//  Created by Amelia Dasari on 12/10/20.
 //
 
 import UIKit
@@ -15,14 +15,22 @@ class ArticleCell: UITableViewCell {
     @IBOutlet weak var desc: UILabel!
     @IBOutlet weak var authorNDate: UILabel!
     @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var categories: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        //imgView.contentMode = .scaleAspectFit;
+        title.sizeToFit();
+        imgView.layer.cornerRadius = 10;
+        imgView.clipsToBounds = true
+        imgView.layer.borderWidth = 1
+        imgView.layer.borderColor = UIColor.white.cgColor;
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
+    
+
 }

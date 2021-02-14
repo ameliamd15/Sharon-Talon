@@ -2,7 +2,7 @@
 //  MenuManager.swift
 //  Sharon Talon
 //
-//  Created by Cyril Dasari on 12/11/20.
+//  Created by Amelia Dasari on 12/11/20.
 //
 
 import UIKit
