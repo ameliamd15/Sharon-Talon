@@ -113,17 +113,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wTa-XN-9PA">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="abq-Hc-tkA">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                 <color key="backgroundColor" red="0.888053596" green="0.69030910729999995" blue="0.2704627812" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="tintColor" red="0.888053596" green="0.69030910729999995" blue="0.2704627812" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="VPn-BA-Qvi"/>
+                                    <constraint firstAttribute="height" constant="44" id="6mW-Ia-d90"/>
+                                    <constraint firstAttribute="width" constant="414" id="sAR-yM-22T"/>
                                 </constraints>
-                            </view>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="abq-Hc-tkA">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <color key="backgroundColor" red="0.888053596" green="0.69030910729999995" blue="0.2704627812" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="barTintColor" red="0.888053596" green="0.69030910729999995" blue="0.2704627812" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <textAttributes key="titleTextAttributes">
                                     <color key="textColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -137,7 +133,7 @@
                                                 <action selector="backButtonPressed:" destination="Jeg-7I-2zU" id="BRp-zA-3j4"/>
                                             </connections>
                                         </barButtonItem>
-                                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="4nR-Tz-dm8">
+                                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" id="4nR-Tz-dm8">
                                             <rect key="frame" x="61" y="6" width="319" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
@@ -149,7 +145,7 @@
                                 </items>
                             </navigationBar>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yI1-94-hqB">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="49" width="414" height="847"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -160,24 +156,13 @@
                         <viewLayoutGuide key="safeArea" id="DcP-uY-i5d"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="yI1-94-hqB" firstAttribute="top" secondItem="abq-Hc-tkA" secondAttribute="bottom" id="0pd-WU-fVt"/>
-                            <constraint firstItem="yI1-94-hqB" firstAttribute="top" secondItem="abq-Hc-tkA" secondAttribute="bottom" id="2sn-80-LiC"/>
-                            <constraint firstAttribute="trailing" secondItem="wTa-XN-9PA" secondAttribute="trailing" id="8F0-3k-Mk2"/>
-                            <constraint firstAttribute="trailing" secondItem="wTa-XN-9PA" secondAttribute="trailing" id="AOY-rz-wPS"/>
-                            <constraint firstItem="wTa-XN-9PA" firstAttribute="top" secondItem="dbB-tD-5HY" secondAttribute="top" id="EIk-38-4jY"/>
-                            <constraint firstItem="yI1-94-hqB" firstAttribute="bottom" secondItem="DcP-uY-i5d" secondAttribute="bottom" id="R4J-eJ-Qeh"/>
-                            <constraint firstItem="yI1-94-hqB" firstAttribute="leading" secondItem="DcP-uY-i5d" secondAttribute="leading" id="Rah-IQ-4T4"/>
-                            <constraint firstItem="abq-Hc-tkA" firstAttribute="top" secondItem="wTa-XN-9PA" secondAttribute="bottom" id="Rbu-Qf-MYK"/>
-                            <constraint firstAttribute="bottom" secondItem="yI1-94-hqB" secondAttribute="bottom" constant="67" id="TVR-yr-CoL"/>
-                            <constraint firstItem="wTa-XN-9PA" firstAttribute="top" secondItem="dbB-tD-5HY" secondAttribute="top" id="TrX-oC-AeI"/>
-                            <constraint firstItem="yI1-94-hqB" firstAttribute="trailing" secondItem="DcP-uY-i5d" secondAttribute="trailing" id="V2D-vX-iOZ"/>
-                            <constraint firstItem="abq-Hc-tkA" firstAttribute="trailing" secondItem="DcP-uY-i5d" secondAttribute="trailing" id="cbB-Hj-QlZ"/>
-                            <constraint firstItem="yI1-94-hqB" firstAttribute="leading" secondItem="DcP-uY-i5d" secondAttribute="leading" id="lon-F0-d3T"/>
-                            <constraint firstItem="yI1-94-hqB" firstAttribute="top" secondItem="abq-Hc-tkA" secondAttribute="bottom" id="pu2-Nd-gSL"/>
-                            <constraint firstItem="yI1-94-hqB" firstAttribute="trailing" secondItem="DcP-uY-i5d" secondAttribute="trailing" id="rLy-vQ-WoA"/>
-                            <constraint firstItem="wTa-XN-9PA" firstAttribute="leading" secondItem="dbB-tD-5HY" secondAttribute="leading" id="xJy-1j-7wQ"/>
-                            <constraint firstItem="abq-Hc-tkA" firstAttribute="leading" secondItem="DcP-uY-i5d" secondAttribute="leading" id="yxu-QY-9Mw"/>
-                            <constraint firstItem="wTa-XN-9PA" firstAttribute="leading" secondItem="dbB-tD-5HY" secondAttribute="leading" id="zbL-ie-NV9"/>
+                            <constraint firstItem="yI1-94-hqB" firstAttribute="trailing" secondItem="DcP-uY-i5d" secondAttribute="trailing" id="1iW-bk-Vn1"/>
+                            <constraint firstItem="yI1-94-hqB" firstAttribute="leading" secondItem="DcP-uY-i5d" secondAttribute="leading" id="Axs-Ya-wet"/>
+                            <constraint firstItem="yI1-94-hqB" firstAttribute="top" secondItem="abq-Hc-tkA" secondAttribute="bottom" constant="5" id="Lcz-ql-6Ha"/>
+                            <constraint firstItem="abq-Hc-tkA" firstAttribute="leading" secondItem="dbB-tD-5HY" secondAttribute="leading" id="etd-FB-yZO"/>
+                            <constraint firstItem="abq-Hc-tkA" firstAttribute="top" secondItem="dbB-tD-5HY" secondAttribute="top" id="gNw-L9-MFc"/>
+                            <constraint firstAttribute="trailing" secondItem="abq-Hc-tkA" secondAttribute="trailing" id="hpR-Xr-XyY"/>
+                            <constraint firstAttribute="bottom" secondItem="yI1-94-hqB" secondAttribute="bottom" id="sQC-Tb-GGg"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
