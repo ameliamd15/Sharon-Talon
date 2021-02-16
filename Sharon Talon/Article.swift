@@ -15,4 +15,6 @@ class Article: NSObject {
     var url: String?;
     var html: String?;
     var categories: [String]?;
+    var content: String?;
+    var author: String?;
 }

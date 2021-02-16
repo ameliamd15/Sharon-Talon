@@ -27,6 +27,9 @@ class ArticleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
         let child = SpinnerViewController()
         // add the spinner view controller
         addChild(child)

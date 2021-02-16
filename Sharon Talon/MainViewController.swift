@@ -17,21 +17,35 @@ class MainViewController: UIViewController {
     
     var sourceIndex = 0;
     var menus = ["Home", "Feature", "School News", "News", "Sports", "A & E", "Editorial", "Class of 2020", "Coronavirus"]
+    var altMenus = ["Home", "Feature", "School News", "News", "Sports", "A & E", "Editorial", "Class of 2020"]
     var urls = ["https://shstalon.com/feed/", "https://shstalon.com/category/feature/feed/", "https://shstalon.com/category/school-news/feed/", "https://shstalon.com/category/news/feed/", "https://shstalon.com/category/sports/feed/", "https://shstalon.com/category/ae/feed/", "https://shstalon.com/category/editorial/feed/", "https://shstalon.com/category/class-of-2020/feed/", "https://shstalon.com/category/coronavirus/feed/"];
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let image = UIImage(named: "SHSLogo.png");
         self.imageView.image = image;
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
         //menuToUrlDict = Dictionary(uniqueKeysWithValues: zip(menus, urls));
         // Do any additional setup after loading the view.
     }
     
     var menuManager: MenuManager? = nil
     @IBAction func menuPressed(_ sender: Any) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy HH:mm:ss Z"
+
+        let datetime = (formatter.date(from: "18-02-2021 12:00:00 +0100") ?? Date())
+        let toDay = Date()
         if (menuManager == nil) {
             menuManager = MenuManager()
-            menuManager?.menus = menus
+            if (toDay > datetime) {
+                menuManager?.menus = menus
+            } else {
+                menuManager?.menus = altMenus
+            }
+            
             menuManager?.mainVC = self
         }
         menuManager!.openMenu()

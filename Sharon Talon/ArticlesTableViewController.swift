@@ -32,6 +32,9 @@ class ArticlesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
         if (articles == nil) {
             self.startLoadArticles()
         }
@@ -61,6 +64,10 @@ class ArticlesTableViewController: UITableViewController {
     
     public func loadArticles(page: Int, maxPages: Int) {
         let url = self.rssUrl + "?paged=" + String(page);
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy HH:mm:ss Z"
+        let cutOff = (formatter.date(from: "18-02-2021 12:00:00 +0100") ?? Date())
+        let toDay = Date()
         
         AF.request(url).responseRSS() { (response) -> Void in
             if let feed: RSSFeed = response.value {
@@ -74,8 +81,31 @@ class ArticlesTableViewController: UITableViewController {
                     article.imgUrl = item.mediaThumbnail;
                     article.url = item.link;
                     article.categories = item.categories;
+                    article.content = item.content;
+                    if let startIndex = article.content?.range(of: "<p>By:") {
+                        if let endIndex = article.content?.range(of: "</p>") {
+                            let substring = article.content?[startIndex.upperBound..<endIndex.lowerBound];
+                            print("AUTHOR:::::" + String(substring ?? "").trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "-", with: "\n"))
+                            article.author = String(substring ?? "").trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: " - ", with: "\n")
+
+                        }
+                    }
                     if (!article.headline!.hasPrefix("Top ")) {
-                        self.articles?.append(article);
+                        if let startIndex = article.headline?.range(of: "covid", options: .caseInsensitive) {
+                            if (toDay > cutOff) {
+                                self.articles?.append(article);
+                            }
+                        }
+                        else {
+                            if let startIndex = article.headline?.range(of: "corona", options: .caseInsensitive) {
+                                if (toDay > cutOff) {
+                                    self.articles?.append(article);
+                                }
+                            }
+                            else {
+                                self.articles?.append(article);
+                            }
+                        }
                     }
                 }
                 if (page < maxPages) {
@@ -93,7 +123,7 @@ class ArticlesTableViewController: UITableViewController {
             }
         }
     }
-    
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -111,10 +141,13 @@ class ArticlesTableViewController: UITableViewController {
         cell.imgView?.image = thumbnailImages[indexPath.item];
         cell.imgView?.setNeedsDisplay();
         cell.imgView?.clipsToBounds = true;
-        cell.title.text = self.articles?[indexPath.item].headline;
-        cell.desc.text = self.articles?[indexPath.item].desc;
+        //cell.title?.textContainer.lineBreakMode =
+
+        cell.title.text = (self.articles?[indexPath.item].headline ?? "");
+        cell.desc.text = self.articles?[indexPath.item].author;
         cell.authorNDate.text = self.articles?[indexPath.item].authorNDate;
         cell.categories.text = self.articles?[indexPath.item].categories?.joined(separator: " | ");
+        //cell.backgroundColor = UIColor.yellow;
         //self.articles?[indexPath.item].categories?.keys;
         //cell.categoryButton.setTitle("Title", for: UIControl.State.normal);
         let imgUrl: String = self.articles?[indexPath.item].imgUrl ?? "";
@@ -125,10 +158,10 @@ class ArticlesTableViewController: UITableViewController {
             //cell.imgView?.clipsToBounds = true;
             AF.request(imgUrl).responseImage { response in
                 if case .success(let image) = response.result {
-                    let resizedImage: UIImage = self.resizeImage(image: image, maxWidthOrHeight: 130);
-                    self.thumbnailImages[indexPath.item] = resizedImage;
+                    //let resizedImage: UIImage = self.resizeImage(image: image, maxWidthOrHeight: 140);
+                    self.thumbnailImages[indexPath.item] = image;
                     if let cell = tableView.cellForRow(at: indexPath) as? ArticleCell {
-                        cell.imgView?.image = resizedImage;
+                        cell.imgView?.image = image;
                         cell.imgView?.contentMode = .scaleAspectFill;
                         //cell.imgView?.clipsToBounds = true;
                         //cell.imageView?.contentMode = .scaleAspectFill;
@@ -139,7 +172,7 @@ class ArticlesTableViewController: UITableViewController {
                 }
             }
         }
-        tableView.rowHeight = 180;
+        tableView.rowHeight = 120;
         tableView.backgroundColor = UIColor.white
         cell.setNeedsLayout();
         return cell;
