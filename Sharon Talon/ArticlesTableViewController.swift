@@ -20,6 +20,8 @@ class ArticlesTableViewController: UITableViewController {
     let df = DateFormatter();
     var dictionary: [String: Data] = [:]
     var loader: UIImage?
+    var pullControl = UIRefreshControl()
+    
     override func loadView() {
         super.loadView()
         if (loader == nil) {
@@ -43,7 +45,23 @@ class ArticlesTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        pullControl.backgroundColor = rgbaToUIColor(r: 226, g: 175, b: 69, a: 1)
+        pullControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        pullControl.addTarget(self, action: #selector(pulledRefreshControl(sender:)), for: UIControl.Event.valueChanged)
+        tableView.addSubview(pullControl)
     }
+    func rgbaToUIColor(r: Int, g: Int, b: Int, a: Float) -> UIColor {
+        let floatRed = CGFloat(r) / 255.0
+        let floatGreen = CGFloat(g) / 255.0
+        let floatBlue = CGFloat(b) / 255.0
+        return UIColor(red: floatRed, green: floatGreen, blue: floatBlue, alpha: 0.5)
+    }
+    var pulledToRefresh = false;
+    @objc func pulledRefreshControl(sender:AnyObject) {
+        pulledToRefresh = true;
+        startLoadArticles();
+    }
+    
     func scrollToTop() {
         let topRow = IndexPath(row: 0, section: 0)
         self.tableView.scrollToRow(at: topRow, at: .top, animated: true)
@@ -66,14 +84,14 @@ class ArticlesTableViewController: UITableViewController {
         let url = self.rssUrl + "?paged=" + String(page);
         let formatter = DateFormatter()
         formatter.dateFormat = "dd-MM-yyyy HH:mm:ss Z"
-        let cutOff = (formatter.date(from: "18-02-2021 12:00:00 +0100") ?? Date())
+        let cutOff = (formatter.date(from: "20-02-2021 12:00:00 +0100") ?? Date())
         let toDay = Date()
         
         AF.request(url).responseRSS() { (response) -> Void in
             if let feed: RSSFeed = response.value {
                 /// Do something with your new RSSFeed object!
                 for item in feed.items {
-                    print(item);
+                    //print(item);
                     let article = Article();
                     article.headline = item.title;
                     article.desc = item.itemDescription;
@@ -82,29 +100,29 @@ class ArticlesTableViewController: UITableViewController {
                     article.url = item.link;
                     article.categories = item.categories;
                     article.content = item.content;
-                    if let startIndex = article.content?.range(of: "<p>By:") {
+                    //print(item.content);
+                    //print(article.content?.range(of: "<p>By:"))
+                    //print(article.content?.range(of: "</p>"))
+                    var startIndex = article.content?.range(of: "<p>By:")
+                    if (startIndex == nil) {
+                        startIndex = article.content?.range(of: "<p>By")
+                    }
+                    if (startIndex != nil) {
                         if let endIndex = article.content?.range(of: "</p>") {
-                            let substring = article.content?[startIndex.upperBound..<endIndex.lowerBound];
-                            print("AUTHOR:::::" + String(substring ?? "").trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "-", with: "\n"))
-                            article.author = String(substring ?? "").trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: " - ", with: "\n")
+                            let substring = article.content?[startIndex!.upperBound..<endIndex.lowerBound];
+                            //print("AUTHOR:::::" + String(substring ?? "").trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "-", with: "\n"))
+                            article.author = String(substring ?? "").trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "A&amp;E", with: "A&E").replacingOccurrences(of: "A+E", with: "A&E")
 
                         }
                     }
                     if (!article.headline!.hasPrefix("Top ")) {
-                        if let startIndex = article.headline?.range(of: "covid", options: .caseInsensitive) {
+                        let exists = (article.categories?.contains("Coronavirus"))
+                        if (exists == true) {
                             if (toDay > cutOff) {
                                 self.articles?.append(article);
                             }
-                        }
-                        else {
-                            if let startIndex = article.headline?.range(of: "corona", options: .caseInsensitive) {
-                                if (toDay > cutOff) {
-                                    self.articles?.append(article);
-                                }
-                            }
-                            else {
-                                self.articles?.append(article);
-                            }
+                        } else {
+                            self.articles?.append(article);
                         }
                     }
                 }
@@ -112,9 +130,15 @@ class ArticlesTableViewController: UITableViewController {
                     self.loadArticles(page: page + 1, maxPages: maxPages)
                 } else {
                     OperationQueue.main.addOperation() {
+                        //DispatchQueue.main.async {
+                        //}
                         self.tableView.separatorStyle = .singleLine
                         self.tableView.reloadData()
                         self.scrollToTop()
+                        if (self.pulledToRefresh) {
+                            self.pulledToRefresh = false;
+                            self.pullControl.endRefreshing()
+                        }
                     }
                 }
             }

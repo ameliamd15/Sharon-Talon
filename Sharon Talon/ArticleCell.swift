@@ -12,7 +12,7 @@ import AlamofireImage
 class ArticleCell: UITableViewCell {
 
     //@IBOutlet weak var title: UILabel!
-    @IBOutlet weak var desc: UILabel!
+    @IBOutlet weak var desc: UITextView!
     @IBOutlet weak var authorNDate: UILabel!
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var categories: UILabel!

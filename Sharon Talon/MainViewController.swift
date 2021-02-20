@@ -36,7 +36,7 @@ class MainViewController: UIViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd-MM-yyyy HH:mm:ss Z"
 
-        let datetime = (formatter.date(from: "18-02-2021 12:00:00 +0100") ?? Date())
+        let datetime = (formatter.date(from: "20-02-2021 12:00:00 +0100") ?? Date())
         let toDay = Date()
         if (menuManager == nil) {
             menuManager = MenuManager()

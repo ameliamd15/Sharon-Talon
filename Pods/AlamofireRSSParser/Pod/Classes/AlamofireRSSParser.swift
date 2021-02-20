@@ -70,8 +70,6 @@ open class AlamofireRSSParser: NSObject, XMLParserDelegate {
     var currentString: String!
     var currentAttributes: [String: String]? = nil
     var parseError: NSError? = nil
-    var cutOff: Date? = nil;
-    var toDay: Date? = nil;
     open var data: Data? = nil {
         didSet {
             if let data = data {
@@ -88,12 +86,6 @@ open class AlamofireRSSParser: NSObject, XMLParserDelegate {
     
     init(data: Data) {
         self.parser = XMLParser(data: data)
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd-MM-yyyy HH:mm:ss Z"
-        self.cutOff = (formatter.date(from: "18-02-2021 12:00:00 +0100") ?? Date())
-        self.toDay = Date()
-        
-        
         super.init()
         
         self.parser?.delegate = self
@@ -205,9 +197,7 @@ open class AlamofireRSSParser: NSObject, XMLParserDelegate {
                 }
             }
             if (elementName == "category") {
-                if (((self.toDay ?? Date() > self.cutOff ?? Date()) || self.currentString != "Coronavirus")) {
-                    currentItem.categories = (currentItem.categories ?? []) + [self.currentString]
-                }
+                currentItem.categories = (currentItem.categories ?? []) + [self.currentString]
             }
             
             
