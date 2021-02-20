@@ -19,7 +19,7 @@ All library dependencies are maintained using cocoapods (https://cocoapods.org/)
 
 ### __Version 1.3__ __(Feb 17, 2021)__
 1. Fixed an issue when dark mode kicks in.
-1. Fixed an issue with RSS parser while parsing article categories. RSS 2.0 categories are not sent over as xml node attributes. Had to modify the AlamoRSSParser.
+1. Fixed an issue with RSS parser while parsing article categories. RSS 2.0 categories are not sent over as xml node attributes, which is what AlamoRSSParser assumed. Will be submitting a pull request later to the Alamo team.
 1. Added "Pull to refresh" to refresh articles
 
 ### __Version 1.2__ __(Feb 15, 2021)__
