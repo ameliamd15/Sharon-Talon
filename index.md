@@ -9,24 +9,24 @@ For parsing the xml rss feeds, I use the AlamofireRSSParser library (https://git
 
 All library dependencies are maintained using cocoapods (https://cocoapods.org/) so that future updates to the app (for example, when we have a new ios version next year) are easy to do. Checkout the Podfile in the project for the version numbers.
 
-##Release History
+## Release Notes
 
-###__Version 1.4__ __(Feb 19, 2021)__
+### __Version 1.4__ __(Feb 19, 2021)__
 1. Fixed occasional crashes when "Pull down to refresh" is used.
 1. Article list now scrolls to the top when a new category is selected.
 1. When the article title spans 3 lines, the last line gets truncated. We now show up to 3 lines of text for the title.
 2. Fixed alignment of the author name.
 
-###__Version 1.3__ __(Feb 17, 2021)__
+### __Version 1.3__ __(Feb 17, 2021)__
 1. Fixed an issue when dark mode kicks in.
 1. Fixed an issue with RSS parser while parsing article categories.
 1. Added "Pull to refresh" to refresh articles
 
-###__Version 1.2__ __(Feb 15, 2021)__
+### __Version 1.2__ __(Feb 15, 2021)__
 1. Bug Fix - Occasional crash when the newsarticle contains a video.
 1. Reduced the spinner size when loading article images.
 1. Fixed the font for article heading.
 1. Removed the unused empty space at the top and bottom of the article
 
-###__Version 1.1__ __(Feb 13, 2021)__
+### __Version 1.1__ __(Feb 13, 2021)__
 
